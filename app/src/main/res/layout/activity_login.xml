@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shopping"
+    android:animateLayoutChanges="true">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_header"
+        android:name="com.example.shoppingappv2.Fragments.HeaderFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_header">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="430dp"
+                            android:padding="20dp">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="350dp"
+                                android:layout_height="60dp"
+                                android:id="@+id/txtInputEmail"
+                                app:errorEnabled="true"
+                                android:background="@drawable/color_border"
+                                android:drawableLeft="@drawable/baseline_email_24"
+                                android:drawablePadding="18dp"
+                                android:textColor="@color/purple_500" >
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="350dp"
+                                    android:layout_height="60dp"
+                                    android:id="@+id/login_Email"
+                                    android:inputType="textEmailAddress"
+                                    android:background="@drawable/color_border"
+                                    android:padding="8dp"
+                                    android:hint="Email"
+                                    android:drawableLeft="@drawable/baseline_email_24"
+                                    android:drawablePadding="8dp"
+                                    android:textColor="@color/purple_500" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="350dp"
+                                android:layout_height="60dp"
+                                android:layout_marginTop="20dp"
+                                android:id="@+id/txtInputPassword"
+                                app:errorEnabled="true"
+                                android:background="@drawable/color_border"
+                                android:drawableLeft="@drawable/baseline_lock_24"
+                                android:drawablePadding="8dp"
+                                android:textColor="@color/purple_500" >
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="350dp"
+                                    android:layout_height="60dp"
+                                    android:id="@+id/login_Password"
+                                    android:inputType="textPassword"
+                                    android:background="@drawable/color_border"
+                                    android:padding="8dp"
+                                    android:hint="Password"
+                                    android:drawableLeft="@drawable/baseline_lock_24"
+                                    android:drawablePadding="8dp"
+                                    android:textColor="@color/purple_500" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Button
+                                android:layout_width="350dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="30dp"
+                                android:text="LOGIN"
+                                android:id="@+id/btn_Login"
+                                android:textSize="18sp"
+                                app:cornerRadius = "30dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txt_Forgot_Password"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="6dp"
+                                android:padding="8dp"
+                                android:text="Forgot Password?"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txt_SignUpRedirect"
+                                android:text="Not yet registered? Signup"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"
+                                android:padding="8dp"
+                                android:layout_marginTop="14dp"
+                                android:textSize="18sp"
+                                android:textColor="@color/black"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
