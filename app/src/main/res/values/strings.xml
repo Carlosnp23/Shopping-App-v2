@@ -5,4 +5,11 @@
     <string name="special_offers">Special Offers</string>
     <string name="all_product">All Product</string>
     <string name="image">Image</string>
+
+    <string name="home">Home</string>
+    <string name="category">Category</string>
+    <string name="favorite">Favorite</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
+    <string name="discover">Discover</string>
 </resources>
