@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.shoppingappv2.Services.CustomAdapter
 import com.example.shoppingappv2.Services.ItemsViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -26,13 +29,14 @@ class ProductsHomeActivity : AppCompatActivity() {
     private lateinit var productList1: RecyclerView
     private lateinit var productList2: RecyclerView
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentPage = "Home"
         setContentView(R.layout.activity_products_home)
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        progressBar = findViewById(R.id.progressBar)
 
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
@@ -44,6 +48,15 @@ class ProductsHomeActivity : AppCompatActivity() {
                     Toast.makeText(this, "Cart", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, CartActivity::class.java)
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                R.id.action_exit -> {
+                    Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show()
+                    progressBar.visibility = View.VISIBLE
+                    FirebaseAuth.getInstance().signOut();
+                    val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
                     true

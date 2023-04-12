@@ -2,6 +2,7 @@ package com.example.shoppingappv2
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,8 +26,8 @@ class LoginRegisterActivity : AppCompatActivity() {
         initRegister()
     }
 
+    @SuppressLint("WrongViewCast")
     private fun initLogin(){
-        currentPage = "Login"
 
         loginRegisterFrame.removeAllViews()
 
@@ -43,15 +44,14 @@ class LoginRegisterActivity : AppCompatActivity() {
                 }
             })
 
-        var login_register = findViewById<TextView>(R.id.login_register_frame)
+        var loginRegister = findViewById<TextView>(R.id.login_register_frame)
 
-        login_register.setOnClickListener(View.OnClickListener {
+        loginRegister.setOnClickListener(View.OnClickListener {
             initRegister()
         })
     }
 
     private fun initRegister(){
-        currentPage = "Register"
 
         loginRegisterFrame.removeAllViews()
 

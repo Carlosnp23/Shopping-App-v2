@@ -8,21 +8,7 @@
     android:background="@drawable/shopping"
     android:animateLayoutChanges="true">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_header"
-        android:name="com.example.shoppingappv2.Fragments.HeaderFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/shopping"
@@ -46,7 +32,7 @@
                     android:id="@+id/txtInputsignupUserName"
                     app:errorEnabled="true"
                     android:background="@drawable/color_border"
-                    android:drawableLeft="@drawable/baseline_person_24"
+                    android:drawableStart="@drawable/baseline_person_24"
                     android:drawablePadding="18dp"
                     android:textColor="@color/purple_500" >
 
@@ -58,7 +44,7 @@
                         android:background="@drawable/color_border"
                         android:padding="8dp"
                         android:hint="User Name"
-                        android:drawableLeft="@drawable/baseline_email_24"
+                        android:drawableStart="@drawable/baseline_email_24"
                         android:drawablePadding="8dp"
                         android:textColor="@color/purple_500" />
 
@@ -71,7 +57,7 @@
                     android:id="@+id/txtInputsignupEmail"
                     app:errorEnabled="true"
                     android:background="@drawable/color_border"
-                    android:drawableLeft="@drawable/baseline_email_24"
+                    android:drawableStart="@drawable/baseline_email_24"
                     android:drawablePadding="8dp"
                     android:textColor="@color/purple_500" >
 
@@ -83,7 +69,7 @@
                         android:background="@drawable/color_border"
                         android:padding="8dp"
                         android:hint="Email"
-                        android:drawableLeft="@drawable/baseline_email_24"
+                        android:drawableStart="@drawable/baseline_email_24"
                         android:drawablePadding="8dp"
                         android:textColor="@color/purple_500" />
 
@@ -96,7 +82,7 @@
                     android:id="@+id/txtInputsignupPassword"
                     app:errorEnabled="true"
                     android:background="@drawable/color_border"
-                    android:drawableLeft="@drawable/baseline_lock_24"
+                    android:drawableStart="@drawable/baseline_lock_24"
                     android:drawablePadding="8dp"
                     android:textColor="@color/purple_500" >
 
@@ -108,7 +94,7 @@
                         android:background="@drawable/color_border"
                         android:padding="8dp"
                         android:hint="Password"
-                        android:drawableLeft="@drawable/baseline_lock_24"
+                        android:drawableStart="@drawable/baseline_lock_24"
                         android:drawablePadding="8dp"
                         android:textColor="@color/purple_500" />
 
@@ -121,7 +107,7 @@
                     android:id="@+id/txtInputConfirmPassword"
                     app:errorEnabled="true"
                     android:background="@drawable/color_border"
-                    android:drawableLeft="@drawable/baseline_lock_24"
+                    android:drawableStart="@drawable/baseline_lock_24"
                     android:drawablePadding="8dp"
                     android:textColor="@color/purple_500" >
 
@@ -130,7 +116,7 @@
                         android:layout_width="350dp"
                         android:layout_height="60dp"
                         android:background="@drawable/color_border"
-                        android:drawableLeft="@drawable/baseline_password_24"
+                        android:drawableStart="@drawable/baseline_password_24"
                         android:drawablePadding="8dp"
                         android:hint="Confirm Password"
                         android:inputType="textPassword"

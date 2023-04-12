@@ -9,10 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.shoppingappv2.Services.SharedPreference
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -26,12 +23,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginRegister: TextView
     private lateinit var loginButton: TextView
     private lateinit var forgotPassword: TextView
-
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentPage = "Login"
         setContentView(R.layout.activity_login)
+
+        progressBar = findViewById(R.id.progressBar)
 
         auth = Firebase.auth
 
@@ -73,8 +71,7 @@ class LoginActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
 
-
-            if (dialog.window != null){
+            if (dialog.window != null) {
 
                 dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
 
@@ -87,9 +84,6 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener(View.OnClickListener {
             val email = loginEmail.text.toString()
             val password = loginPassword.text.toString()
-
-            val i = Intent(this, ProductsHomeActivity::class.java)
-            startActivity(i)
 
             // Validate Email & Password
             validateEmailPassword()
@@ -105,6 +99,7 @@ class LoginActivity : AppCompatActivity() {
                             sp.setPreference("isLoggedIn", "true")
                             val userEmail = auth.currentUser?.email
                             sp.setPreference("user_email", userEmail)
+                            progressBar.visibility = View.VISIBLE
                             val intent = Intent(this, ProductsHomeActivity::class.java)
                             startActivity(intent)
                             Toast.makeText(this, "Login success", Toast.LENGTH_SHORT).show()

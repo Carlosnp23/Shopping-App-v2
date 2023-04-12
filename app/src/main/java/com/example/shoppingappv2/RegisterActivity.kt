@@ -20,7 +20,6 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentPage = "Register"
         setContentView(R.layout.activity_register)
 
         auth = Firebase.auth
@@ -64,7 +63,9 @@ class RegisterActivity : AppCompatActivity() {
                                 sp.setPreference("isLoggedIn", "true")
                                 val userEmail = auth.currentUser?.email
                                 sp.setPreference("user_email", userEmail)
-                                val intent = Intent(this, ProductsHomeActivity::class.java)
+                                sp.setPreference("user_name", userName)
+                                val intent = Intent(this, LoginActivity::class.java)
+                                startActivity(intent)
                                 Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT)
                                     .show()
                             } else {

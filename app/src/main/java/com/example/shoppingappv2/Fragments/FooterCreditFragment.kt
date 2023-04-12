@@ -15,6 +15,7 @@ class FooterCreditFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        // 2023 Copyright reserved
         var view = inflater.inflate(R.layout.fragment_footer_credit, container, false);
 
         return view

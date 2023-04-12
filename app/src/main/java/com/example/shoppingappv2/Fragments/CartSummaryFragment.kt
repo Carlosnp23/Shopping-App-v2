@@ -17,14 +17,14 @@ class CartSummaryFragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_cart_summary, container, false)
 
         val sp = SharedPreference(this.context)
-        var cart_total_value_string = sp.getPreference("cart_total")
-        var cart_subtotal = view.findViewById<TextView>(R.id.cart_subtotal)
-        var cart_total = view.findViewById<TextView>(R.id.cart_total)
+        var cartTotalValue = sp.getPreference("cart_total")
+        var cartSubtotal = view.findViewById<TextView>(R.id.cart_subtotal)
+        var cartTotal = view.findViewById<TextView>(R.id.cart_total)
 
-        if(cart_total_value_string != null){
-            var cart_total_value = cart_total_value_string.toFloat()
-            cart_subtotal.text = "CAD $"+String.format("%.2f", cart_total_value).toString()
-            cart_total.text = "CAD $"+("%.2f".format((cart_total_value+500))).toString()
+        if(cartTotalValue != null){
+            var cartTotalValue2 = cartTotalValue.toFloat()
+            cartSubtotal.text = "CAD $"+String.format("%.2f", cartTotalValue2).toString()
+            cartTotal.text = "CAD $"+("%.2f".format((cartTotalValue2+50))).toString()
         }
 
         return view

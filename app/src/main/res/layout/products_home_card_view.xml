@@ -78,6 +78,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_baseline_add_shopping_cart_24" />
+
             </LinearLayout>
 
         </LinearLayout>

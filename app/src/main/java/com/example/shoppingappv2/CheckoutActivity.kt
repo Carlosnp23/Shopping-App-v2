@@ -16,94 +16,100 @@ import com.google.firebase.ktx.Firebase
 
 class CheckoutActivity : AppCompatActivity() {
 
-    lateinit var sp: SharedPreference
-    lateinit var name: String
-    lateinit var address: String
-    lateinit var phone: String
-    lateinit var email: String
-    lateinit var checkout_feedback_image: ImageView
-    lateinit var checkout_feedback: FrameLayout
+    private lateinit var sp: SharedPreference
+    private lateinit var username: String
+    private lateinit var name: String
+    private lateinit var address: String
+    private lateinit var phone: String
+    private lateinit var email: String
+    private lateinit var checkoutFeedbackImage: ImageView
+    private lateinit var checkoutFeedback: FrameLayout
+    private lateinit var paymentOption: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentPage = "Checkout"
         setContentView(R.layout.activity_checkout)
-
 
         sp = SharedPreference(this)
 
-        var checkout_name = findViewById<EditText>(R.id.checkout_name)
-        var checkout_address = findViewById<EditText>(R.id.checkout_address)
-        var checkout_phone = findViewById<EditText>(R.id.checkout_phone)
-        var checkout_email = findViewById<EditText>(R.id.checkout_email)
-        var checkout_back = findViewById<Button>(R.id.checkout_back)
-        var checkout_proceed = findViewById<Button>(R.id.checkout_proceed)
-        var checkout_payment_options = findViewById<RadioGroup>(R.id.checkout_payment_options)
-        checkout_feedback_image = findViewById<ImageView>(R.id.checkout_feedback_image)
-        checkout_feedback = findViewById<FrameLayout>(R.id.checkout_feedback)
+        val checkoutName = findViewById<EditText>(R.id.checkout_name)
+        val checkoutAddress = findViewById<EditText>(R.id.checkout_address)
+        val checkoutPhone = findViewById<EditText>(R.id.checkout_phone)
+        val checkoutEmail = findViewById<EditText>(R.id.checkout_email)
+        val checkoutBack = findViewById<Button>(R.id.checkout_back)
+        val checkoutProceed = findViewById<Button>(R.id.checkout_proceed)
+        val checkoutPaymentOptions = findViewById<RadioGroup>(R.id.checkout_payment_options)
+        checkoutFeedbackImage = findViewById(R.id.checkout_feedback_image)
+        checkoutFeedback = findViewById(R.id.checkout_feedback)
 
-        checkout_email.setText(sp.getPreference("user_email"))
+        checkoutEmail.setText(sp.getPreference("user_email"))
+        checkoutName.setText(sp.getPreference("user_name"))
 
-        checkout_back.setOnClickListener(View.OnClickListener {
+        checkoutBack.setOnClickListener(View.OnClickListener {
             val intent = Intent(this, CartActivity::class.java)
             startActivity(intent)
         })
 
-        //var popAlert = Pop_Alert(this, this)
-        checkout_proceed.setOnClickListener(View.OnClickListener {
-            name = checkout_name.text.toString()
-            address = checkout_address.text.toString()
-            phone = checkout_phone.text.toString()
-            email = checkout_email.text.toString()
+        checkoutProceed.setOnClickListener(View.OnClickListener {
+            name = checkoutName.text.toString()
+            address = checkoutAddress.text.toString()
+            phone = checkoutPhone.text.toString()
+            email = checkoutEmail.text.toString()
 
-            if(name != "" && address != "" && phone != "" && email != "") {
-                val selectedId: Int = checkout_payment_options.getCheckedRadioButtonId()
+            if(name.isNotEmpty() && address.isNotEmpty() &&
+                phone.isNotEmpty() && email.isNotEmpty()) {
+
+                val selectedId: Int = checkoutPaymentOptions.checkedRadioButtonId
                 if (selectedId != -1) {
-                    val checkout_payment_option =
-                        (findViewById<View>(selectedId) as RadioButton).getText()
+                    val checkoutPaymentOption =
+                        (findViewById<View>(selectedId) as RadioButton).text
 
-                    if (checkout_payment_option == "Pay Online") {
-
+                    if (checkoutPaymentOption == "Pay Online") {
+                        paymentOption = "Pay Online"
+                        Toast.makeText(this, "Pay Online", Toast.LENGTH_SHORT).show()
+                    } else {
+                        paymentOption = "Cash On Delivery"
                     }
                     saveToDB()
                 } else {
-                    //popAlert.showAlert("Opzzz!", "Please select a payment method", false, null)
+                    Toast.makeText(this, "Please select a payment method", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                //popAlert.showAlert("Opzzz!", "All the fields should be filled properly", false, null)
+                Toast.makeText(this, "All the fields should be filled properly", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun saveToDB(){
-        var cart_list_string = sp.getPreference("cart_list")
-        var cart_list = cart_list_string.split("|").toTypedArray()
+        val cartListString = sp.getPreference("cart_list")
+        val cartList = cartListString.split("|").toTypedArray()
 
         val db = Firebase.firestore
         val orders = db.collection("Orders")
 
         // Add a new document with a generated id.
         val order = hashMapOf(
-            "name" to name,
-            "address" to address,
-            "phone" to phone,
-            "email" to email,
-            "total" to sp.getPreference("cart_total"),
-            "timestamp" to (java.sql.Timestamp(System.currentTimeMillis())).toString()
+            "Name" to name,
+            "Address" to address,
+            "Phone" to phone,
+            "Email" to email,
+            "Total" to sp.getPreference("cart_total"),
+            "PaymentOption" to paymentOption,
+            "Timestamp" to (java.sql.Timestamp(System.currentTimeMillis())).toString()
         )
 
         orders.add(order).addOnSuccessListener { documentReference ->
             Log.d(ContentValues.TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
 
-            for (cart_item in cart_list) {
-                var items = cart_item.split("^").toTypedArray()
+            for (cartItem in cartList) {
+                val items = cartItem.split("^").toTypedArray()
 
                 val item = hashMapOf(
-                    "product" to items[1].toString(),
-                    "price" to items[2].toString(),
-                    "qty" to "1"
+                    "Product" to items[1],
+                    "Price" to items[2],
+                    "Quantity" to "1"
                 )
-                orders.document(documentReference.id).collection("items").add(item)
+                orders.document(documentReference.id).collection("Items").add(item)
                     .addOnSuccessListener { documentReference ->
                     }.addOnFailureListener { e ->
                         Log.w(ContentValues.TAG, "Error adding item - "+items[1].toString()+"\n", e)
@@ -117,20 +123,20 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     private fun feedback(feedback: Boolean){
-        var intent1: Intent
+        val intent: Intent
         if (feedback){
-            Glide.with(this).load(R.drawable.checkout_success).into(checkout_feedback_image)
+            Glide.with(this).load(R.drawable.checkout_success).into(checkoutFeedbackImage)
             sp.removePreference("cart_list")
             sp.removePreference("cart_total")
-            intent1 = Intent(this, ProductsHomeActivity::class.java)
+            intent = Intent(this, ProductsHomeActivity::class.java)
         } else {
             Glide.with(this).load(R.drawable.checkout_failed)
-                .into(checkout_feedback_image)
-            intent1 = Intent(this, CheckoutActivity::class.java)
+                .into(checkoutFeedbackImage)
+            intent = Intent(this, CheckoutActivity::class.java)
         }
-        checkout_feedback.visibility = View.VISIBLE
+        checkoutFeedback.visibility = View.VISIBLE
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(intent1)
+            startActivity(intent)
             finish()
         }, 10000)
     }
