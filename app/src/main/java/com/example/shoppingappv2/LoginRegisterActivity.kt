@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 
-lateinit var login_register_frame: FrameLayout
+lateinit var loginRegisterFrame: FrameLayout
 lateinit var inflater: LayoutInflater
 lateinit var view: View
 
@@ -19,27 +19,27 @@ class LoginRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_register)
 
-        login_register_frame = findViewById<FrameLayout>(R.id.login_register_frame)
+        loginRegisterFrame = findViewById(R.id.login_register_frame)
         inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         initRegister()
     }
 
-    fun initLogin(){
+    private fun initLogin(){
         currentPage = "Login"
 
-        login_register_frame.removeAllViews()
+        loginRegisterFrame.removeAllViews()
 
         view = inflater.inflate(R.layout.activity_login, null)
-        login_register_frame!!.addView(view, login_register_frame!!.childCount - 1)
+        loginRegisterFrame!!.addView(view, loginRegisterFrame!!.childCount - 1)
 
-        login_register_frame.animate()
+        loginRegisterFrame.animate()
             .alpha(1.0f)
             .setDuration(500)
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
-                    login_register_frame.setVisibility(View.VISIBLE)
+                    loginRegisterFrame.visibility = View.VISIBLE
                 }
             })
 
@@ -53,24 +53,24 @@ class LoginRegisterActivity : AppCompatActivity() {
     private fun initRegister(){
         currentPage = "Register"
 
-        login_register_frame.removeAllViews()
+        loginRegisterFrame.removeAllViews()
 
         view = inflater.inflate(R.layout.activity_register, null)
-        login_register_frame!!.addView(view, login_register_frame!!.childCount - 1)
+        loginRegisterFrame!!.addView(view, loginRegisterFrame!!.childCount - 1)
 
-        login_register_frame.animate()
+        loginRegisterFrame.animate()
             .alpha(1.0f)
             .setDuration(500)
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
-                    login_register_frame.setVisibility(View.VISIBLE)
+                    loginRegisterFrame.visibility = View.VISIBLE
                 }
             })
 
-        var register_login = findViewById<TextView>(R.id.register_login)
+        var registerLogin = findViewById<TextView>(R.id.register_Login)
 
-        register_login.setOnClickListener(View.OnClickListener {
+        registerLogin.setOnClickListener(View.OnClickListener {
             initLogin()
         })
     }

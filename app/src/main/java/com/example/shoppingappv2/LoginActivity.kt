@@ -88,6 +88,9 @@ class LoginActivity : AppCompatActivity() {
             val email = loginEmail.text.toString()
             val password = loginPassword.text.toString()
 
+            val i = Intent(this, ProductsHomeActivity::class.java)
+            startActivity(i)
+
             // Validate Email & Password
             validateEmailPassword()
 

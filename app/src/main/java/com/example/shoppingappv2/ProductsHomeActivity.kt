@@ -1,6 +1,7 @@
 package com.example.shoppingappv2
 
 import android.content.ContentValues
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.shoppingappv2.Services.CustomAdapter
 import com.example.shoppingappv2.Services.ItemsViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -20,17 +22,39 @@ class ProductsHomeActivity : AppCompatActivity() {
     private val data1 = ArrayList<ItemsViewModel>()
     private val data2 = ArrayList<ItemsViewModel>()
     private val db = Firebase.firestore
-    lateinit var productsHomeScrollView: ScrollView
-    lateinit var productList1: RecyclerView
-    lateinit var productList2: RecyclerView
-    //lateinit var popAlert: Pop_Alert
+    private lateinit var productsHomeScrollView: ScrollView
+    private lateinit var productList1: RecyclerView
+    private lateinit var productList2: RecyclerView
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         currentPage = "Home"
         setContentView(R.layout.activity_products_home)
 
-        //popAlert = Pop_Alert(this, this)
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+
+        bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.action_home -> {
+                    Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.action_cart -> {
+                    Toast.makeText(this, "Cart", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, CartActivity::class.java)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
+
+
 
         productsHomeScrollView = findViewById<ScrollView>(R.id.products_home_scroll_view)
         productList1 = findViewById<RecyclerView>(R.id.product_list_1)
