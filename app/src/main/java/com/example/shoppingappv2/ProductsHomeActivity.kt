@@ -87,7 +87,9 @@ class ProductsHomeActivity : AppCompatActivity() {
         productList2.layoutManager = LinearLayoutManager(this)
 
         productList1.apply {
-           // layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, true)
+            set3DItem(true)
+            setAlpha(true)
+            setInfinite(true)
             val snapHelper = LinearSnapHelper()
             snapHelper.attachToRecyclerView(productList1)
         }
