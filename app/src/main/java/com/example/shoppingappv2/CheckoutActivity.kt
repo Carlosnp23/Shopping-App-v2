@@ -138,6 +138,6 @@ class CheckoutActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(intent)
             finish()
-        }, 10000)
+        }, 7000)
     }
 }

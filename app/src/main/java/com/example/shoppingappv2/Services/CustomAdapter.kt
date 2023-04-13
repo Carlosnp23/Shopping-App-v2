@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppingappv2.R
 import com.squareup.picasso.Picasso
 
-class CustomAdapter (private val mList: List<ItemsViewModel>, val context: Context) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(private val mList: List<ItemsViewModel>, val context: Context) :
+    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     lateinit var sp: SharedPreference
 
@@ -28,29 +29,35 @@ class CustomAdapter (private val mList: List<ItemsViewModel>, val context: Conte
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val ItemsViewModel = mList[position]
-        Log.i("Items", position.toString()+" | "+ItemsViewModel.Name+" | "+ItemsViewModel.Price)
-        Picasso.get().load(ItemsViewModel.Image).into(holder.imageView);
-        holder.product_name.text = ItemsViewModel.Name
-        holder.product_price.text = "CAD $"+ItemsViewModel.Price
-        holder.add_to_cart.setOnClickListener(View.OnClickListener {
-            var cart_list = sp.getPreference("cart_list")
-            if(cart_list == null){
-                cart_list = ItemsViewModel.Image+"^"+ItemsViewModel.Name+"^"+ItemsViewModel.Price
+        val itemsViewModel = mList[position]
+        Log.i(
+            "Items",
+            position.toString() + " | " + itemsViewModel.Name + " | " + itemsViewModel.Price
+        )
+        Picasso.get().load(itemsViewModel.Image).into(holder.imageView);
+        holder.productName.text = itemsViewModel.Name
+        holder.productPrice.text = "CAD $" + itemsViewModel.Price
+        holder.addToCart.setOnClickListener(View.OnClickListener {
+            var cartList = sp.getPreference("cart_list")
+            if (cartList == null) {
+                cartList =
+                    itemsViewModel.Image + "^" + itemsViewModel.Name + "^" + itemsViewModel.Price
             } else {
-                cart_list += "|"+ItemsViewModel.Image+"^"+ItemsViewModel.Name+"^"+ItemsViewModel.Price
+                cartList += "|" + itemsViewModel.Image + "^" + itemsViewModel.Name + "^" + itemsViewModel.Price
             }
-            sp.setPreference("cart_list", cart_list)
-            var cart_total_value_string = sp.getPreference("cart_total")
-            var cart_total_value: Float
-            var price = String.format("%.2f", ((ItemsViewModel.Price).replace(",", "")).toFloat()).toFloat()
-            if(cart_total_value_string == null){
-                cart_total_value = price
+            sp.setPreference("cart_list", cartList)
+            var cartTotalValueString = sp.getPreference("cart_total")
+            var cartTotalValue: Float
+            var price =
+                String.format("%.2f", ((itemsViewModel.Price).replace(",", "")).toFloat()).toFloat()
+            if (cartTotalValueString == null) {
+                cartTotalValue = price
             } else {
-                cart_total_value = String.format("%.2f", cart_total_value_string.toFloat()).toFloat()
-                cart_total_value += price
+                cartTotalValue =
+                    String.format("%.2f", cartTotalValueString.toFloat()).toFloat()
+                cartTotalValue += price
             }
-            sp.setPreference("cart_total", cart_total_value.toString())
+            sp.setPreference("cart_total", cartTotalValue.toString())
             Toast.makeText(context, "Item added to cart!", Toast.LENGTH_SHORT).show()
         })
     }
@@ -63,8 +70,8 @@ class CustomAdapter (private val mList: List<ItemsViewModel>, val context: Conte
     // Holds the views for adding it to image and text
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val imageView: ImageView = itemView.findViewById(R.id.product_image)
-        val product_name: TextView = itemView.findViewById(R.id.product_name)
-        val product_price: TextView = itemView.findViewById(R.id.product_price)
-        val add_to_cart: ImageView = itemView.findViewById(R.id.add_to_cart)
+        val productName: TextView = itemView.findViewById(R.id.product_name)
+        val productPrice: TextView = itemView.findViewById(R.id.product_price)
+        val addToCart: ImageView = itemView.findViewById(R.id.add_to_cart)
     }
 }

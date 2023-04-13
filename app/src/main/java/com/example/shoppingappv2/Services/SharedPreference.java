@@ -8,28 +8,28 @@ public class SharedPreference {
     private android.content.SharedPreferences pref;
     private android.content.SharedPreferences.Editor editor;
 
-    public SharedPreference(Context context){
+    public SharedPreference(Context context) {
         this.context = context;
         pref = context.getSharedPreferences("Prefs", 0); // 0 - for private mode
         editor = pref.edit();
     }
 
-    public void setPreference(String key, String value){
+    public void setPreference(String key, String value) {
         editor.putString(key, value);
         editor.commit();
     }
 
-    public String getPreference(String key){
+    public String getPreference(String key) {
         String value = pref.getString(key, null);
         return value;
     }
 
-    public void removePreference(String key){
+    public void removePreference(String key) {
         editor.remove(key);
         editor.commit();
     }
 
-    public void clearPreference(){
+    public void clearPreference() {
         editor.clear();
         editor.commit();
     }

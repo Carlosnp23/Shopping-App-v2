@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shopping"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:background="@drawable/shopping">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,89 +26,89 @@
                 android:padding="20dp">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtInputsignupUserName"
                     android:layout_width="350dp"
                     android:layout_height="60dp"
-                    android:id="@+id/txtInputsignupUserName"
-                    app:errorEnabled="true"
                     android:background="@drawable/color_border"
                     android:drawableStart="@drawable/baseline_person_24"
                     android:drawablePadding="18dp"
-                    android:textColor="@color/purple_500" >
+                    android:textColor="@color/purple_500"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/register_UserName"
                         android:layout_width="350dp"
                         android:layout_height="60dp"
-                        android:id="@+id/register_UserName"
-                        android:inputType="textEmailAddress"
                         android:background="@drawable/color_border"
-                        android:padding="8dp"
-                        android:hint="User Name"
                         android:drawableStart="@drawable/baseline_email_24"
                         android:drawablePadding="8dp"
+                        android:hint="User Name"
+                        android:inputType="textEmailAddress"
+                        android:padding="8dp"
                         android:textColor="@color/purple_500" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtInputsignupEmail"
                     android:layout_width="350dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
-                    android:id="@+id/txtInputsignupEmail"
-                    app:errorEnabled="true"
                     android:background="@drawable/color_border"
                     android:drawableStart="@drawable/baseline_email_24"
                     android:drawablePadding="8dp"
-                    android:textColor="@color/purple_500" >
+                    android:textColor="@color/purple_500"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/register_Email"
                         android:layout_width="350dp"
                         android:layout_height="60dp"
-                        android:id="@+id/register_Email"
-                        android:inputType="textEmailAddress"
                         android:background="@drawable/color_border"
-                        android:padding="8dp"
-                        android:hint="Email"
                         android:drawableStart="@drawable/baseline_email_24"
                         android:drawablePadding="8dp"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:padding="8dp"
                         android:textColor="@color/purple_500" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtInputsignupPassword"
                     android:layout_width="350dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
-                    android:id="@+id/txtInputsignupPassword"
-                    app:errorEnabled="true"
                     android:background="@drawable/color_border"
                     android:drawableStart="@drawable/baseline_lock_24"
                     android:drawablePadding="8dp"
-                    android:textColor="@color/purple_500" >
+                    android:textColor="@color/purple_500"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/register_Password"
                         android:layout_width="350dp"
                         android:layout_height="60dp"
-                        android:id="@+id/register_Password"
-                        android:inputType="textPassword"
                         android:background="@drawable/color_border"
-                        android:padding="8dp"
-                        android:hint="Password"
                         android:drawableStart="@drawable/baseline_lock_24"
                         android:drawablePadding="8dp"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:padding="8dp"
                         android:textColor="@color/purple_500" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtInputConfirmPassword"
                     android:layout_width="350dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
-                    android:id="@+id/txtInputConfirmPassword"
-                    app:errorEnabled="true"
                     android:background="@drawable/color_border"
                     android:drawableStart="@drawable/baseline_lock_24"
                     android:drawablePadding="8dp"
-                    android:textColor="@color/purple_500" >
+                    android:textColor="@color/purple_500"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/register_ConfirmPassword"

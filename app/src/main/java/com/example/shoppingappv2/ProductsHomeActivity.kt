@@ -11,7 +11,9 @@ import android.widget.ScrollView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.shoppingappv2.Services.CustomAdapter
 import com.example.shoppingappv2.Services.ItemsViewModel
@@ -19,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 
 class ProductsHomeActivity : AppCompatActivity() {
 
@@ -26,8 +29,9 @@ class ProductsHomeActivity : AppCompatActivity() {
     private val data2 = ArrayList<ItemsViewModel>()
     private val db = Firebase.firestore
     private lateinit var productsHomeScrollView: ScrollView
-    private lateinit var productList1: RecyclerView
+    private lateinit var productList1: CarouselRecyclerview
     private lateinit var productList2: RecyclerView
+    private lateinit var snapHelper: SnapHelper
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var progressBar: ProgressBar
 
@@ -69,17 +73,23 @@ class ProductsHomeActivity : AppCompatActivity() {
 
 
 
-        productsHomeScrollView = findViewById<ScrollView>(R.id.products_home_scroll_view)
-        productList1 = findViewById<RecyclerView>(R.id.product_list_1)
-        productList2 = findViewById<RecyclerView>(R.id.product_list_2)
+        productsHomeScrollView = findViewById(R.id.products_home_scroll_view)
+        productList1 = findViewById(R.id.product_list_1)
+        productList2 = findViewById(R.id.product_list_2)
 
         // this creates a vertical layout Manager
-        object : LinearLayoutManager(this){ override fun canScrollVertically(): Boolean { return false } }
-        productList1.layoutManager = LinearLayoutManager(this)
+        object : LinearLayoutManager(this) {
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
+        productList1.getCarouselLayoutManager().centerPosition()
         productList2.layoutManager = LinearLayoutManager(this)
 
         productList1.apply {
-            layoutManager = GridLayoutManager(this.context, 2)
+           // layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, true)
+            val snapHelper = LinearSnapHelper()
+            snapHelper.attachToRecyclerView(productList1)
         }
         productList2.apply {
             layoutManager = GridLayoutManager(this.context, 2)
@@ -93,14 +103,20 @@ class ProductsHomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun getProductList1(){
+    private fun getProductList1() {
         db.collection("Products")
             .whereEqualTo("Category", "Offer")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d(ContentValues.TAG, "Offer Name => ${document.data["Name"]}")
-                    data1.add(ItemsViewModel(document.data["Image"].toString(), document.data["Name"].toString(), document.data["Price"].toString()))
+                    data1.add(
+                        ItemsViewModel(
+                            document.data["Image"].toString(),
+                            document.data["Name"].toString(),
+                            document.data["Price"].toString()
+                        )
+                    )
                 }
                 getProductList2()
             }
@@ -111,14 +127,20 @@ class ProductsHomeActivity : AppCompatActivity() {
             }
     }
 
-    private fun getProductList2(){
+    private fun getProductList2() {
         db.collection("Products")
             .whereEqualTo("Category", "No Offer")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d(ContentValues.TAG, "Product Name => ${document.data["Name"]}")
-                    data2.add(ItemsViewModel(document.data["Image"].toString(), document.data["Name"].toString(), document.data["Price"].toString()))
+                    data2.add(
+                        ItemsViewModel(
+                            document.data["Image"].toString(),
+                            document.data["Name"].toString(),
+                            document.data["Price"].toString()
+                        )
+                    )
                 }
                 loadProducts()
             }
@@ -129,8 +151,8 @@ class ProductsHomeActivity : AppCompatActivity() {
             }
     }
 
-    private fun loadProducts(){
-        if(data1.isEmpty() && data2.isEmpty()){
+    private fun loadProducts() {
+        if (data1.isEmpty() && data2.isEmpty()) {
             Toast.makeText(this, "Product list is empty", Toast.LENGTH_SHORT).show()
         } else {
             // This will pass the ArrayList to our Adapter

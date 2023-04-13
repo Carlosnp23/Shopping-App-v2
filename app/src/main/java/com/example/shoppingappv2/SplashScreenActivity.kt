@@ -26,8 +26,8 @@ class SplashScreenActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             var isLoggedIn = sp.getPreference("isLoggedIn")
-            if(isLoggedIn == "true"){
-                if(userEmail == null){
+            if (isLoggedIn == "true") {
+                if (userEmail == null) {
                     sp.setPreference("isLoggedIn", "false")
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)

@@ -88,7 +88,7 @@ class LoginActivity : AppCompatActivity() {
             // Validate Email & Password
             validateEmailPassword()
 
-            if(email.isNotEmpty() || password.isNotEmpty()){
+            if (email.isNotEmpty() || password.isNotEmpty()) {
 
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
@@ -115,13 +115,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     // Outside onCreate
-    private fun compareEmail(email: EditText){
+    private fun compareEmail(email: EditText) {
 
-        if (email.text.toString().isEmpty()){
+        if (email.text.toString().isEmpty()) {
             return
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()) {
             return
         }
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/products_home_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductsHomeActivity"
-    android:id="@+id/products_home_container">
+    android:orientation="vertical"
+    tools:context=".ProductsHomeActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -24,11 +24,11 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bottom_background"
             android:elevation="2dp"
-            app:menu="@menu/bottom_navigation_view"
             app:itemIconSize="30dp"
             app:itemIconTint="@drawable/selector_bottom_navigation"
             app:itemRippleColor="@android:color/white"
-            app:labelVisibilityMode="unlabeled"/>
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/bottom_navigation_view" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeContainer"
@@ -45,30 +45,31 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="180dp"
+                        android:layout_height="130dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp">
 
                         <ImageView
                             android:id="@+id/imageView4"
-                            android:contentDescription="@string/image"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/image"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/products_header_banner" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp">
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center">
 
                         <TextView
                             android:id="@+id/textView6"
@@ -83,20 +84,21 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                         android:id="@+id/product_list_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:nestedScrollingEnabled="false" />
+                        android:orientation="horizontal" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:layout_marginBottom="10dp">
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center">
 
                         <TextView
                             android:id="@+id/textView7"
@@ -111,46 +113,22 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/product_list_2"
                         android:layout_width="match_parent"
+                        android:layout_height="1000dp"
+                        android:orientation="vertical" />
+
+                    <include
+                        layout="@layout/footer_contact"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:nestedScrollingEnabled="false" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp">
-
-                        <include
-                            layout="@layout/footer_contact"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <androidx.fragment.app.FragmentContainerView
-                            android:id="@+id/fragment_footer_credit"
-                            android:name="com.example.shoppingappv2.Fragments.FooterCreditFragment"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </LinearLayout>
 
@@ -172,4 +150,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+</LinearLayout>

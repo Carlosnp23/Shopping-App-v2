@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppingappv2.R
 import com.squareup.picasso.Picasso
 
-class CartAdapter (val context: Context) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter(val context: Context) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     lateinit var sp: SharedPreference
-    lateinit var cart_list: Array<String>
+    lateinit var cartList: Array<String>
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,36 +26,36 @@ class CartAdapter (val context: Context) : RecyclerView.Adapter<CartAdapter.View
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val cart_item_string = cart_list[position]
+        val cartItemString = cartList[position]
         try {
-            var cart_item = cart_item_string.split("^").toTypedArray()
+            var cartItem = cartItemString.split("^").toTypedArray()
 
-            Picasso.get().load(cart_item[0]).into(holder.imageView);
-            holder.product_name.text = cart_item[1]
-            holder.product_price.text = "CAD $" + cart_item[2]
+            Picasso.get().load(cartItem[0]).into(holder.imageView);
+            holder.productName.text = cartItem[1]
+            holder.productPrice.text = "CAD $" + cartItem[2]
         } catch (e: Exception) {
             Log.e("Cart item exception", e.toString())
-            Log.e("Cart item exception", cart_item_string)
+            Log.e("Cart item exception", cartItemString)
         }
     }
 
     // return the number of the items in the list
     override fun getItemCount(): Int {
         sp = SharedPreference(context)
-        var cart_list_string = sp.getPreference("cart_list")
+        var cartListString = sp.getPreference("cart_list")
 
-        if(cart_list_string == null){
+        if (cartListString == null) {
             return 0
         } else {
-            cart_list = cart_list_string.split("|").toTypedArray()
-            return cart_list.size
+            cartList = cartListString.split("|").toTypedArray()
+            return cartList.size
         }
     }
 
     // Holds the views for adding it to image and text
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val imageView: ImageView = itemView.findViewById(R.id.cart_product_image)
-        val product_name: TextView = itemView.findViewById(R.id.cart_product_name)
-        val product_price: TextView = itemView.findViewById(R.id.cart_product_price)
+        val productName: TextView = itemView.findViewById(R.id.cart_product_name)
+        val productPrice: TextView = itemView.findViewById(R.id.cart_product_price)
     }
 }
