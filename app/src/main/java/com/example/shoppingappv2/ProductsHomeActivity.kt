@@ -71,8 +71,6 @@ class ProductsHomeActivity : AppCompatActivity() {
             }
         }
 
-
-
         productsHomeScrollView = findViewById(R.id.products_home_scroll_view)
         productList1 = findViewById(R.id.product_list_1)
         productList2 = findViewById(R.id.product_list_2)
@@ -90,7 +88,7 @@ class ProductsHomeActivity : AppCompatActivity() {
             set3DItem(true)
             setAlpha(true)
             setInfinite(true)
-            val snapHelper = LinearSnapHelper()
+            snapHelper = LinearSnapHelper()
             snapHelper.attachToRecyclerView(productList1)
         }
         productList2.apply {
